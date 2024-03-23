@@ -21,11 +21,11 @@ RUN chmod -R 755 /var/www/*
 
 EXPOSE 9000
 
-COPY ./tools/run_wp.sh ./
-RUN chmod +x ./run_wp.sh
+COPY ./tools/wp_setup.sh ./
+RUN chmod +x ./wp_setup.sh
 
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-ENTRYPOINT ["bash", "./run_wp.sh"]
+ENTRYPOINT ["bash", "./wp_setup.sh"]
 
 
