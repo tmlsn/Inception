@@ -1,6 +1,8 @@
-all:
-	mkdir -p /home/tmalless/data/mariadb
-	mkdir -p /home/tmalless/data/wordpress
+all: 
+	mkdir -p /home/ael-youb/data/mariadb
+	chmod -R 777 /home/ael-youb/data/mariadb
+	mkdir -p /home/ael-youb/data/wordpress
+	chmod -R 777 /home/ael-youb/data/wordpress
 	docker compose -f ./srcs/docker-compose.yml build
 	docker compose -f ./srcs/docker-compose.yml up -d
 
@@ -14,9 +16,11 @@ clean:
 	docker network rm inception
 
 fclean: clean
-	@sudo rm -rf /home/tmalless/data/mariadb/*
-	@sudo rm -rf /home/tmalless/data/wordpress/*
+	@sudo rm -rf /home/hiisox/data/mariadb/*
+	@sudo rm -rf /home/hiisox/data/wordpress/*
 	@docker system prune -af
+	docker volume rm srcs_mariadb
+	docker volume rm srcs_wordpress
 
 re: fclean all
 

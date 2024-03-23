@@ -13,10 +13,10 @@ services:
       - "3306"
     networks:
       - inception
-    restart: unless-stopped
+    restart: always
     env_file: .env
     healthcheck:
-      test: mysqladmin ping --host=localhost -p${MYSQL_ROOT_PW}
+      test: mysqladmin ping --host=localhost -p${MYSQL_ROOT_PASSWORD}
       interval: 5s
       timeout: 1s
       retries: 20
@@ -34,27 +34,27 @@ services:
       - "9000"
     networks:
       - inception
-    restart: unless-stopped
+    restart: always
     env_file: .env
-    depends_on: 
+    depends_on:
       mariadb:
-        condition: service_healthy
+        condition: service_healthy    
 
   nginx:
     image: nginx
     container_name: nginx
     build:
       context: ./requirements/nginx
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile	
     volumes:
       - wordpress:/var/www/html/wordpress
     depends_on:
       - wordpress
     ports:
-      - "433:433"
+      - "443:443"
     networks:
       - inception
-    restart : unless-stopped
+    restart: always
     env_file: .env
     healthcheck:
       test: 'curl -kfsSL https://localhost:443/status'
@@ -69,13 +69,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/tmalless/data/mariadb'
+      device: '/home/ael-youb/data/mariadb'
   wordpress:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/tmalless/data/wordpress'
+      device: '/home/ael-youb/data/wordpress'
 
 networks:
   inception:
