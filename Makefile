@@ -1,8 +1,6 @@
 all: 
 	mkdir -p /home/tmalless/data/mariadb
-	chmod -R 777 /home/tmalless/data/mariadb
 	mkdir -p /home/tmalless/data/wordpress
-	chmod -R 777 /home/tmalless/data/wordpress
 	docker compose -f ./srcs/docker-compose.yml build
 	docker compose -f ./srcs/docker-compose.yml up -d
 
