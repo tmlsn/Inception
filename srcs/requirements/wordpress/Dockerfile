@@ -17,6 +17,7 @@ RUN cd /var/www/html \
 	&& rm /var/www/html/wordpress-6.3.2.tar.gz
 
 RUN chown -R www-data:www-data /var/www/*
+#RUN chown -R www-data:www-data ../../../../../data/wordpress/wp-content/*
 RUN chmod -R 755 /var/www/*
 
 EXPOSE 9000
